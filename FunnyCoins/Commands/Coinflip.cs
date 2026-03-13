@@ -67,7 +67,8 @@ namespace FunnyCoins.Commands
             }
 
             effect.Execute(player);
-            FunnyCoins.Instance.ShowEffectMessage(player, effect);
+            if (!effect.HandlesOwnMessage)
+                FunnyCoins.Instance.ShowEffectMessage(player, effect);
 
             response = $"Coinflip executed: {(string.IsNullOrEmpty(arg) ? effect.Id : arg)}";
             return true;
