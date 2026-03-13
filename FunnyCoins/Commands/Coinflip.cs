@@ -1,12 +1,9 @@
 using System;
-using System.Linq;
 using System.Text;
 using CommandSystem;
 using LabApi.Features.Permissions;
 using FunnyCoins.Effects;
 using LabApi.Features.Wrappers;
-using PlayerRoles;
-using RemoteAdmin;
 
 namespace FunnyCoins.Commands
 {

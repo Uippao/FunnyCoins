@@ -1,6 +1,5 @@
 using LabApi.Features.Wrappers;
 using UnityEngine;
-using LabApi.Features.Enums;
 
 namespace FunnyCoins.Effects
 {

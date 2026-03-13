@@ -1,6 +1,4 @@
 using LabApi.Features.Wrappers;
-using InventorySystem.Items;
-using InventorySystem.Items.ThrowableProjectiles;
 using UnityEngine;
 
 namespace FunnyCoins.Effects
