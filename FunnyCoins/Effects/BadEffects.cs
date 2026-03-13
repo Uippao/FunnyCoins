@@ -19,7 +19,7 @@ namespace FunnyCoins.Effects
                 pos,
                 ItemType.GrenadeHE,
                 player,
-                2.5
+                2.0
             );
         }
     }
