@@ -25,7 +25,7 @@ namespace FunnyCoins
         public class EffectMessage
         {
             public string Text { get; set; }
-            public float Duration { get; set; } = 4f;
+            public float Duration { get; set; }
         }
         
         public int GetWeight(ICoinEffect effect)

@@ -24,7 +24,7 @@ namespace FunnyCoins.Effects
         public string DefaultTemplate { get; }
         public float DefaultDuration { get; }
 
-        public EffectMessageDefinition(string key, string defaultTemplate, float defaultDuration = 3f)
+        public EffectMessageDefinition(string key, string defaultTemplate, float defaultDuration = 4f)
         {
             Key = key;
             DefaultTemplate = defaultTemplate;
