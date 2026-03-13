@@ -5,19 +5,19 @@ using UnityEngine;
 
 namespace FunnyCoins.Effects
 {
-    public class BoomEffect : ICoinEffect
+    public class BoomEffect : SimpleCoinEffect
     {
-        public string Id => "Boom";
-        public bool IsGood => false;
-        public int DefaultWeight => 7;
+        public override string Id => "Boom";
+        public override bool IsGood => false;
+        public override int DefaultWeight => 7;
 
-        public string DefaultMessage => "Boom.";
+        public override string DefaultMessage => "Boom.";
 
-        public void Execute(Player player)
+        public override void Execute(Player player)
         {
             Vector3 pos = player.Position + Vector3.up * 0.1f;
 
-            TimedGrenadeProjectile grenade = TimedGrenadeProjectile.SpawnActive(
+            TimedGrenadeProjectile.SpawnActive(
                 pos,
                 ItemType.GrenadeHE,
                 player,

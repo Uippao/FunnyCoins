@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using FunnyCoins.Effects;
 using LabApi.Events.Arguments.PlayerEvents;
@@ -124,7 +125,8 @@ namespace FunnyCoins
             var effect = EffectRegistry.PickRandom(pool);
 
             effect.Execute(player);
-            Instance.ShowEffectMessage(player, effect);
+            if (!effect.HandlesOwnMessage)
+                Instance.ShowEffectMessage(player, effect);
 
             LogDebug($"{player.Nickname} flipped a coin. Roll: {(good ? "GOOD" : "BAD")}");
 
@@ -163,27 +165,49 @@ namespace FunnyCoins
             }
         }
         
-        public void ShowEffectMessage(Player player, ICoinEffect effect)
+        internal void LogDebug(string text)
         {
-            if (!Config.CustomText.EffectMessages.TryGetValue(effect.Id, out var msg))
+           if (Config.Debug)
+               Logger.Debug(text);
+        }
+        
+        public (string text, float duration)? GetEffectMessageTemplate(string effectId, string key = "default")
+        {
+            if (Config.CustomText.EffectMessages.TryGetValue(effectId, out var dict))
+            {
+                if (dict.TryGetValue(key, out var msg))
+                    return (msg.Text, msg.Duration);
+            }
+            return null;
+        }
+
+        public void ShowEffectMessage(Player player, ICoinEffect effect, string key = "default", params object[] args)
+        {
+            var tpl = GetEffectMessageTemplate(effect.Id, key);
+            if (tpl == null)
                 return;
+
+            string text = tpl.Value.text;
+            float duration = tpl.Value.duration;
+
+            if (args != null && args.Length > 0)
+            {
+                try
+                {
+                    text = string.Format(CultureInfo.InvariantCulture, text, args);
+                }
+                catch (FormatException)
+                {
+                }
+            }
 
             var display = RueDisplay.Get(player);
             display.Remove(CooldownTag);
             display.Show(
                 EffectTag,
-                new BasicElement(
-                    250,
-                    $"<align=left>{msg.Text}</align>"
-                ),
-                msg.Duration
+                new BasicElement(250, $"<align=left>{text}</align>"),
+                duration
             );
-        }
-        
-        internal void LogDebug(string text)
-        {
-           if (Config.Debug)
-               Logger.Debug(text);
         }
     }
 }

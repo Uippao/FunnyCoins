@@ -4,39 +4,35 @@ using LabApi.Features.Enums;
 
 namespace FunnyCoins.Effects
 {
-    public class HealEffect : ICoinEffect
+    public class HealEffect : SimpleCoinEffect
     {
-        public string Id => "Heal";
-        public bool IsGood => true;
-        public int DefaultWeight => 10;
+        public override string Id => "Heal";
+        public override bool IsGood => true;
+        public override int DefaultWeight => 10;
 
-        public string DefaultMessage => "You've been magically healed!";
+        public override string DefaultMessage => "You've been magically healed!";
 
-        public void Execute(Player player)
+        public override void Execute(Player player)
         {
             player.Health = player.MaxHealth;
         }
     }
 
-    public class AidEffect : ICoinEffect
+    public class AidEffect : SimpleCoinEffect
     {
-        public string Id => "Aid";
-        public bool IsGood => true;
-        public int DefaultWeight => 4;
+        public override string Id => "Aid";
+        public override bool IsGood => true;
+        public override int DefaultWeight => 4;
 
-        public string DefaultMessage => "You've received some humanitarian aid!";
+        public override string DefaultMessage => "You've received some humanitarian aid!";
 
-        public void Execute(Player player)
+        public override void Execute(Player player)
         {
             Vector3 pos = player.Position;
 
-            Pickup medkit = Pickup.Create(ItemType.Medkit, pos);
-            Pickup painkillers1 = Pickup.Create(ItemType.Painkillers, pos);
-            Pickup painkillers2 = Pickup.Create(ItemType.Painkillers, pos);
-            
-            medkit.Spawn();
-            painkillers1.Spawn();
-            painkillers2.Spawn();
+            Pickup.Create(ItemType.Medkit, pos).Spawn();
+            Pickup.Create(ItemType.Painkillers, pos).Spawn();
+            Pickup.Create(ItemType.Painkillers, pos).Spawn();
         }
     }
 }

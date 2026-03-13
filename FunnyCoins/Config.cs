@@ -18,14 +18,14 @@ namespace FunnyCoins
         {
             public string CooldownText { get; set; } = "Time before next coinflip: {0}";
 
-            public Dictionary<string, EffectMessage> EffectMessages { get; set; }
-                = new Dictionary<string, EffectMessage>();
+            public Dictionary<string, Dictionary<string, EffectMessage>> EffectMessages { get; set; }
+                = new Dictionary<string, Dictionary<string, EffectMessage>>();
         }
         
         public class EffectMessage
         {
             public string Text { get; set; }
-            public float Duration { get; set; } = 3f;
+            public float Duration { get; set; } = 4f;
         }
         
         public int GetWeight(ICoinEffect effect)
@@ -51,15 +51,25 @@ namespace FunnyCoins
         {
             foreach (var effect in effects)
             {
-                if (!CustomText.EffectMessages.ContainsKey(effect.Id))
+                if (!CustomText.EffectMessages.TryGetValue(effect.Id, out var dict))
                 {
-                    CustomText.EffectMessages[effect.Id] = new EffectMessage
+                    dict = new Dictionary<string, EffectMessage>();
+                    CustomText.EffectMessages[effect.Id] = dict;
+                }
+
+                foreach (var def in effect.DefaultMessages)
+                {
+                    if (!dict.ContainsKey(def.Key))
                     {
-                        Text = effect.DefaultMessage,
-                        Duration = 4f
-                    };
+                        dict[def.Key] = new EffectMessage
+                        {
+                            Text = def.DefaultTemplate,
+                            Duration = def.DefaultDuration
+                        };
+                    }
                 }
             }
         }
+
     }
 }
