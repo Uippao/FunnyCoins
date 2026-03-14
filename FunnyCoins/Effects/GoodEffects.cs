@@ -1,19 +1,40 @@
+using System.Collections.Generic;
 using LabApi.Features.Wrappers;
 using UnityEngine;
 
 namespace FunnyCoins.Effects
 {
-    public class HealEffect : SimpleCoinEffect
+    public class StrengthenedEffect : ICoinEffect
     {
-        public override string Id => "Heal";
-        public override bool IsGood => true;
-        public override int DefaultWeight => 10;
+        public string Id => "Strengthened";
+        public bool IsGood => true;
+        public int DefaultWeight => 7;
 
-        public override string DefaultMessage => "You've been magically healed!";
+        public bool HandlesOwnMessage => true;
 
-        public override void Execute(Player player)
+        public IEnumerable<EffectMessageDefinition> DefaultMessages => new[]
         {
-            player.Health = player.MaxHealth;
+            new EffectMessageDefinition("damaged", "You've been magically healed!", 4f),
+            new EffectMessageDefinition("fullhealth", "You feel stronger!", 4f)
+        };
+
+        public string DefaultMessage => null;
+
+        public void Execute(Player player)
+        {
+            if (player.Health < player.MaxHealth)
+            {
+                player.Health = player.MaxHealth;
+
+                FunnyCoins.Instance.ShowEffectMessage(player, this, "damaged");
+            }
+            else
+            {
+                player.MaxHealth += 100;
+                player.Health = player.MaxHealth;
+
+                FunnyCoins.Instance.ShowEffectMessage(player, this, "fullhealth");
+            }
         }
     }
 
@@ -21,7 +42,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "Aid";
         public override bool IsGood => true;
-        public override int DefaultWeight => 4;
+        public override int DefaultWeight => 15;
 
         public override string DefaultMessage => "You've received some humanitarian aid!";
 
