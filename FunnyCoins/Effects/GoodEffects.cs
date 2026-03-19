@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CustomPlayerEffects;
+using InventorySystem.Items.Usables.Scp244;
 using LabApi.Features.Wrappers;
 using UnityEngine;
 
@@ -215,7 +216,7 @@ namespace FunnyCoins.Effects
         {
             Vector3 pos = player.Position;
 
-            Pickup.Create(ItemType.GunCOM15, pos).Spawn();
+            Utils.SpawnGunWithAmmo(ItemType.GunCOM15, pos);
         }
     }
     
@@ -365,7 +366,16 @@ namespace FunnyCoins.Effects
                 ? ItemType.SCP244a
                 : ItemType.SCP244b;
 
-            Pickup.Create(scp244, pos).Spawn();
+            Pickup pickup244 = Pickup.Create(scp244, pos);
+            if (pickup244 != null)
+            {
+                Scp244Pickup pickupScp244 = pickup244 as Scp244Pickup;
+                if (pickupScp244 != null)
+                {
+                    pickupScp244.State = Scp244State.Active;
+                }
+                pickup244.Spawn();
+            }  
         }
     }
     
@@ -468,8 +478,9 @@ namespace FunnyCoins.Effects
             Pickup.Create(armor, pos).Spawn();
             Pickup.Create(ItemType.Ammo9x19, pos).Spawn();
             Pickup.Create(ItemType.Ammo9x19, pos).Spawn();
+            Pickup.Create(ItemType.Ammo9x19, pos).Spawn();
             Pickup.Create(ItemType.Ammo556x45, pos).Spawn();
-            Pickup.Create(ItemType.GunCOM18, pos).Spawn();
+            Utils.SpawnGunWithAmmo(ItemType.GunCOM18, pos);
             Pickup.Create(ItemType.Medkit, pos).Spawn();
         }
     }
@@ -487,7 +498,7 @@ namespace FunnyCoins.Effects
         {
             Vector3 pos = player.Position;
 
-            Pickup.Create(ItemType.GunRevolver, pos).Spawn();
+            Utils.SpawnGunWithAmmo(ItemType.GunRevolver, pos);
         }
     }
     
@@ -525,7 +536,7 @@ namespace FunnyCoins.Effects
                 FunnyCoins.Rng.Next(Utils.LMGs.Count)
             ];
 
-            Pickup.Create(lmg, pos).Spawn();
+            Utils.SpawnGunWithAmmo(lmg, pos);
         }
     }
     
@@ -533,7 +544,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "FSP";
         public override bool IsGood => true;
-        public override int DefaultWeight => 15;
+        public override int DefaultWeight => 16;
 
         public override string DefaultMessage => "What will I do with this piece of garbage?";
         public override float DefaultMessageDuration => 6f;
@@ -542,7 +553,7 @@ namespace FunnyCoins.Effects
         {
             Vector3 pos = player.Position;
 
-            Pickup.Create(ItemType.GunFSP9, pos).Spawn();
+            Utils.SpawnGunWithAmmo(ItemType.GunFSP9, pos);
         }
     }
     

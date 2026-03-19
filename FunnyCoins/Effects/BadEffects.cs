@@ -14,7 +14,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "Boom";
         public override bool IsGood => false;
-        public override int DefaultWeight => 12;
+        public override int DefaultWeight => 13;
 
         public override string DefaultMessage => "Boom.";
 
@@ -35,7 +35,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "HeartAttack";
         public override bool IsGood => false;
-        public override int DefaultWeight => 7;
+        public override int DefaultWeight => 9;
 
         public override string DefaultMessage => "You're having a heart attack!";
 
@@ -49,7 +49,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "ToeStub";
         public override bool IsGood => false;
-        public override int DefaultWeight => 13;
+        public override int DefaultWeight => 15;
 
         public override string DefaultMessage => "You stubbed your toe";
 
@@ -92,7 +92,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "Crippled";
         public override bool IsGood => false;
-        public override int DefaultWeight => 11;
+        public override int DefaultWeight => 10;
 
         public override string DefaultMessage => "Your legs give out from under you";
 
@@ -106,7 +106,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "DropItems";
         public override bool IsGood => false;
-        public override int DefaultWeight => 9;
+        public override int DefaultWeight => 12;
 
         public override string DefaultMessage => "You fumble and drop your items";
 
@@ -174,7 +174,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "SeveredHands";
         public override bool IsGood => false;
-        public override int DefaultWeight => 4;
+        public override int DefaultWeight => 5;
 
         public override string DefaultMessage => "Eh, you never needed those anyway";
         public override float DefaultMessageDuration => 5f;
