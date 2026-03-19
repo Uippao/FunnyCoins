@@ -23,11 +23,22 @@ namespace FunnyCoins.Effects
             {
                 ICoinEffect effect = (ICoinEffect)Activator.CreateInstance(type);
 
-                if (effect.IsGood)
-                    GoodEffects.Add(effect);
-                else
-                    BadEffects.Add(effect);
+                Register(effect);
             }
+        }
+        
+        public static void Register(ICoinEffect effect)
+        {
+            if (effect == null)
+                return;
+
+            if (GetEffectById(effect.Id) != null)
+                return;
+
+            if (effect.IsGood)
+                GoodEffects.Add(effect);
+            else
+                BadEffects.Add(effect);
         }
         
         public static ICoinEffect PickRandom(List<ICoinEffect> effects)

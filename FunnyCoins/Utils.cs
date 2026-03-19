@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CustomPlayerEffects;
+using FunnyCoins.Effects;
 using InventorySystem;
 using InventorySystem.Items;
 using InventorySystem.Items.Firearms;
@@ -239,6 +240,11 @@ namespace FunnyCoins
             if (AmmoPerPickup.TryGetValue(ammoType, out int value))
                 return value;
             return 20;
+        }
+        
+        internal static bool IsExternal(ICoinEffect effect)
+        {
+            return effect.GetType().Assembly != typeof(FunnyCoins).Assembly;
         }
     }
 }

@@ -81,6 +81,7 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="API.cs" />
         <Compile Include="CoinEffect.cs" />
         <Compile Include="Commands\Coinflip.cs" />
         <Compile Include="Config.cs" />

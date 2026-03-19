@@ -34,12 +34,18 @@ namespace FunnyCoins.Commands
             if (arg == "list")
             {
                 var sb = new StringBuilder();
+
                 sb.AppendLine("Good Effects:");
                 foreach (var e in EffectRegistry.GoodEffects)
-                    sb.AppendLine($"- {e.Id}");
+                {
+                    sb.AppendLine($"- {e.Id}" + (Utils.IsExternal(e) ? " [EXT]" : ""));
+                }
+
                 sb.AppendLine("Bad Effects:");
                 foreach (var e in EffectRegistry.BadEffects)
-                    sb.AppendLine($"- {e.Id}");
+                {
+                    sb.AppendLine($"- {e.Id}" + (Utils.IsExternal(e) ? " [EXT]" : ""));
+                }
 
                 response = sb.ToString();
                 return true;
