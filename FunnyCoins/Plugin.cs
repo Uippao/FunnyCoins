@@ -7,6 +7,7 @@ using LabApi.Events.Handlers;
 using LabApi.Features;
 using LabApi.Loader.Features.Plugins;
 using LabApi.Features.Wrappers;
+using LabApi.Loader.Features.Plugins.Enums;
 using MEC;
 using UnityEngine;
 using Logger = LabApi.Features.Console.Logger;
@@ -23,7 +24,8 @@ namespace FunnyCoins
         public override string Author { get; } = "Uippao";
         public override Version Version { get; } = new Version(1, 0, 0, 0);
         public override Version RequiredApiVersion { get; } = new Version(LabApiProperties.CompiledVersion);
-        
+        public override LoadPriority Priority { get; } = LoadPriority.High;
+
         public static FunnyCoins Instance { get; private set; }
         
         public static readonly Random Rng = new Random();
