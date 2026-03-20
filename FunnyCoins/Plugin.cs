@@ -88,7 +88,7 @@ namespace FunnyCoins
                 {
                     ev.IsAllowed = false;
                     
-                    string text = string.Format(Config.CustomText.CooldownText, $"{remaining:F1}s");
+                    string text = string.Format(Config.CustomText.CooldownText, $"{remaining:F1}");
 
                     var display = RueDisplay.Get(player);
                     display.Remove(EffectTag);
