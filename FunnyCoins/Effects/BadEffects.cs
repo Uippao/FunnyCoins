@@ -14,7 +14,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "Boom";
         public override bool IsGood => false;
-        public override int DefaultWeight => 13;
+        public override int DefaultWeight => 15;
 
         public override string DefaultMessage => "Boom.";
 
@@ -35,7 +35,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "HeartAttack";
         public override bool IsGood => false;
-        public override int DefaultWeight => 9;
+        public override int DefaultWeight => 11;
 
         public override string DefaultMessage => "You're having a heart attack!";
 
@@ -49,7 +49,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "ToeStub";
         public override bool IsGood => false;
-        public override int DefaultWeight => 15;
+        public override int DefaultWeight => 20;
 
         public override string DefaultMessage => "You stubbed your toe";
 
@@ -63,7 +63,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "Concussed";
         public override bool IsGood => false;
-        public override int DefaultWeight => 16;
+        public override int DefaultWeight => 18;
 
         public override string DefaultMessage => "Your head is spinning";
 
@@ -77,7 +77,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "Exhausted";
         public override bool IsGood => false;
-        public override int DefaultWeight => 14;
+        public override int DefaultWeight => 17;
 
         public override string DefaultMessage => "You suddenly feel extremely tired";
 
@@ -92,7 +92,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "Crippled";
         public override bool IsGood => false;
-        public override int DefaultWeight => 10;
+        public override int DefaultWeight => 13;
 
         public override string DefaultMessage => "Your legs give out from under you";
 
@@ -106,7 +106,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "DropItems";
         public override bool IsGood => false;
-        public override int DefaultWeight => 12;
+        public override int DefaultWeight => 16;
 
         public override string DefaultMessage => "You fumble and drop your items";
 
@@ -142,7 +142,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "ClearInventory";
         public override bool IsGood => false;
-        public override int DefaultWeight => 8;
+        public override int DefaultWeight => 10;
 
         public override string DefaultMessage => "All your items have disappeared";
 
@@ -156,7 +156,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "RandomBadEffect";
         public override bool IsGood => false;
-        public override int DefaultWeight => 13;
+        public override int DefaultWeight => 15;
 
         public override string DefaultMessage => "Something terrible has happened to you";
 
@@ -259,11 +259,68 @@ namespace FunnyCoins.Effects
         }
     }
     
+    public class NukeEffect : ICoinEffect
+    {
+        public string Id => "Nuke";
+        public bool IsGood => false;
+        public int DefaultWeight => 2;
+
+        public bool HandlesOwnMessage => true;
+        public string DefaultMessage => null;
+
+        public IEnumerable<EffectMessageDefinition> DefaultMessages => new[]
+        {
+            new EffectMessageDefinition("detonated", "Hope you like balls", 4f),
+            new EffectMessageDefinition("started", "Time to go", 4f),
+            new EffectMessageDefinition("stopped", "The mighty coin has saved the facility", 6f)
+        };
+
+        public void Execute(Player player)
+        {
+            if (Warhead.IsDetonated)
+            {
+                FunnyCoins.Instance.ShowEffectMessage(player, this, "detonated");
+                
+                Vector3 pos = player.Position + Vector3.up * 1.7f;
+
+                TimedGrenadeProjectile.SpawnActive(
+                    pos,
+                    ItemType.SCP018,
+                    player
+                );
+
+                TimedGrenadeProjectile.SpawnActive(
+                    pos,
+                    ItemType.SCP018,
+                    player
+                );
+
+                TimedGrenadeProjectile.SpawnActive(
+                    pos,
+                    ItemType.SCP018,
+                    player
+                );
+                return;
+            }
+
+            if (Warhead.IsDetonationInProgress)
+            {
+                Warhead.Stop();
+                FunnyCoins.Instance.ShowEffectMessage(player, this, "stopped");
+            }
+            else
+            {
+                Warhead.Start();
+                FunnyCoins.Instance.ShowEffectMessage(player, this, "started");
+            }
+        }
+    }
+    
     public class RoleSwapEffect : SimpleCoinEffect
     {
         public override string Id => "RoleSwap";
         public override bool IsGood => false;
-        public override int DefaultWeight => 15;
+        public override int DefaultWeight => 22;
 
         public override string DefaultMessage => "Switcheroo!";
 
@@ -287,7 +344,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "Zombified";
         public override bool IsGood => false;
-        public override int DefaultWeight => 8;
+        public override int DefaultWeight => 11;
         
         public override string DefaultMessage => "Get zombified loser";
 
@@ -301,7 +358,7 @@ namespace FunnyCoins.Effects
     {
         public string Id => "TeleportToScp";
         public bool IsGood => false;
-        public int DefaultWeight => 12;
+        public int DefaultWeight => 16;
 
         public bool HandlesOwnMessage => true;
 
@@ -341,7 +398,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "Pocket";
         public override bool IsGood => false;
-        public override int DefaultWeight => 6;
+        public override int DefaultWeight => 14;
 
         public override string DefaultMessage => "Welcome to the shadow realm";
         public override float DefaultMessageDuration => 5f;
@@ -356,7 +413,7 @@ namespace FunnyCoins.Effects
     {
         public string Id => "SwapPosition";
         public bool IsGood => false;
-        public int DefaultWeight => 10;
+        public int DefaultWeight => 19;
 
         public bool HandlesOwnMessage => true;
 

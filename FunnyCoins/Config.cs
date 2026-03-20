@@ -16,7 +16,7 @@ namespace FunnyCoins
 
         public class CustomStrings
         {
-            public string CooldownText { get; set; } = "Time before next coinflip: {0}";
+            public string CooldownText { get; set; } = "Time before next coinflip: {0}s";
 
             public Dictionary<string, Dictionary<string, EffectMessage>> EffectMessages { get; set; }
                 = new Dictionary<string, Dictionary<string, EffectMessage>>();

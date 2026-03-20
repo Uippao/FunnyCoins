@@ -11,7 +11,7 @@ namespace FunnyCoins.Effects
     {
         public string Id => "Strengthened";
         public bool IsGood => true;
-        public int DefaultWeight => 12;
+        public int DefaultWeight => 17;
 
         public bool HandlesOwnMessage => true;
 
@@ -45,7 +45,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "Aid";
         public override bool IsGood => true;
-        public override int DefaultWeight => 18;
+        public override int DefaultWeight => 25;
 
         public override string DefaultMessage => "You've received some humanitarian aid!";
 
@@ -63,7 +63,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "RandomGoodEffect";
         public override bool IsGood => true;
-        public override int DefaultWeight => 15;
+        public override int DefaultWeight => 19;
 
         public override string DefaultMessage => "You feel better in some way";
         public override float DefaultMessageDuration => 5f;
@@ -82,7 +82,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "Ghost";
         public override bool IsGood => true;
-        public override int DefaultWeight => 5;
+        public override int DefaultWeight => 6;
 
         public override string DefaultMessage => "You became a ghost (temporarily)";
         public override float DefaultMessageDuration => 5f;
@@ -98,7 +98,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "Stealth";
         public override bool IsGood => true;
-        public override int DefaultWeight => 7;
+        public override int DefaultWeight => 9;
 
         public override string DefaultMessage => "You became stealthier!";
 
@@ -127,7 +127,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "BetterVision";
         public override bool IsGood => true;
-        public override int DefaultWeight => 4;
+        public override int DefaultWeight => 3;
 
         public override string DefaultMessage => "Your vision improved";
 
@@ -143,7 +143,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "Handling";
         public override bool IsGood => true;
-        public override int DefaultWeight => 16;
+        public override int DefaultWeight => 19;
 
         public override string DefaultMessage => "You got better at handling weapons";
         public override float DefaultMessageDuration => 5f;
@@ -173,7 +173,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "SCP500";
         public override bool IsGood => true;
-        public override int DefaultWeight => 16;
+        public override int DefaultWeight => 20;
 
         public override string DefaultMessage => "You got some nice meds!";
         public override float DefaultMessageDuration => 5f;
@@ -191,7 +191,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "Coin";
         public override bool IsGood => true;
-        public override int DefaultWeight => 11;
+        public override int DefaultWeight => 18;
 
         public override string DefaultMessage => "You got more coins!";
 
@@ -208,7 +208,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "COM15";
         public override bool IsGood => true;
-        public override int DefaultWeight => 12;
+        public override int DefaultWeight => 21;
 
         public override string DefaultMessage => "Use it carefully...";
 
@@ -240,7 +240,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "SpecialWeapon";
         public override bool IsGood => true;
-        public override int DefaultWeight => 6;
+        public override int DefaultWeight => 5;
 
         public override string DefaultMessage => "Quite the weapon you have there";
 
@@ -259,7 +259,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "BadKeycard";
         public override bool IsGood => true;
-        public override int DefaultWeight => 17;
+        public override int DefaultWeight => 18;
 
         public override string DefaultMessage => "There, have a keycard";
 
@@ -298,7 +298,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "WeirdKeycard";
         public override bool IsGood => true;
-        public override int DefaultWeight => 13;
+        public override int DefaultWeight => 15;
 
         public override string DefaultMessage => "Now I haven't seen that thing in a long time...";
         public override float DefaultMessageDuration => 6f;
@@ -335,7 +335,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "Headgear";
         public override bool IsGood => true;
-        public override int DefaultWeight => 7;
+        public override int DefaultWeight => 6;
 
         public override string DefaultMessage => "You got some very fashionable headgear!";
         public override float DefaultMessageDuration => 5f;
@@ -400,7 +400,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "Candy";
         public override bool IsGood => true;
-        public override int DefaultWeight => 10;
+        public override int DefaultWeight => 13;
 
         public override string DefaultMessage => "You got some sweets";
 
@@ -428,7 +428,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "Adrenaline";
         public override bool IsGood => true;
-        public override int DefaultWeight => 16;
+        public override int DefaultWeight => 18;
 
         public override string DefaultMessage => "I heard you wanted some adrenaline";
         public override float DefaultMessageDuration => 5f;
@@ -448,7 +448,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "SurfacePass";
         public override bool IsGood => true;
-        public override int DefaultWeight => 17;
+        public override int DefaultWeight => 24;
 
         public override string DefaultMessage => "You want out, right?";
 
@@ -464,7 +464,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "CombatKit";
         public override bool IsGood => true;
-        public override int DefaultWeight => 10;
+        public override int DefaultWeight => 16;
 
         public override string DefaultMessage => "Take some cool gear";
 
@@ -489,7 +489,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "Revolver";
         public override bool IsGood => true;
-        public override int DefaultWeight => 14;
+        public override int DefaultWeight => 19;
 
         public override string DefaultMessage => "Wanna play some russian roulette?";
         public override float DefaultMessageDuration => 5f;
@@ -506,7 +506,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "OldMan";
         public override bool IsGood => true;
-        public override int DefaultWeight => 16;
+        public override int DefaultWeight => 23;
 
         public override string DefaultMessage => "Happy now, old man?";
         public override float DefaultMessageDuration => 5f;
@@ -544,7 +544,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "FSP";
         public override bool IsGood => true;
-        public override int DefaultWeight => 16;
+        public override int DefaultWeight => 17;
 
         public override string DefaultMessage => "What will I do with this piece of garbage?";
         public override float DefaultMessageDuration => 6f;
@@ -581,7 +581,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "Rifle";
         public override bool IsGood => true;
-        public override int DefaultWeight => 12;
+        public override int DefaultWeight => 10;
 
         public override string DefaultMessage => "Need a rifle?";
 
@@ -600,7 +600,7 @@ namespace FunnyCoins.Effects
     {
         public override string Id => "Radio";
         public override bool IsGood => true;
-        public override int DefaultWeight => 17;
+        public override int DefaultWeight => 25;
 
         public override string DefaultMessage => "Hope this helps!";
 
