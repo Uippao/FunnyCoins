@@ -10,13 +10,13 @@ using UnityEngine;
 
 namespace FunnyCoins.Effects
 {
-    public class BoomEffect : SimpleCoinEffect
+    public class GrenadeEffect : SimpleCoinEffect
     {
-        public override string Id => "Boom";
+        public override string Id => "Grenade";
         public override bool IsGood => false;
         public override int DefaultWeight => 15;
 
-        public override string DefaultMessage => "Boom.";
+        public override string DefaultMessage => "You like grenades?";
 
         public override void Execute(Player player)
         {
@@ -27,6 +27,27 @@ namespace FunnyCoins.Effects
                 ItemType.GrenadeHE,
                 player,
                 2.0
+            );
+        }
+    }
+    
+    public class BoomEffect : SimpleCoinEffect
+    {
+        public override string Id => "Boom";
+        public override bool IsGood => false;
+        public override int DefaultWeight => 9;
+
+        public override string DefaultMessage => "Boom.";
+
+        public override void Execute(Player player)
+        {
+            Vector3 pos = player.Position;
+
+            TimedGrenadeProjectile.SpawnActive(
+                pos,
+                ItemType.GrenadeHE,
+                player,
+                0.0
             );
         }
     }
