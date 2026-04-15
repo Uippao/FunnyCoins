@@ -2,4 +2,7 @@
   <PropertyGroup>
     <SL_REFERENCES>/home/uippao/Documents/Apps/SCPSL-deps-builder/References</SL_REFERENCES>
   </PropertyGroup>
+  <PropertyGroup>
+    <SL_DEPENDENCIES>/home/uippao/Documents/Apps/SCPSL-deps-builder/Dependencies</SL_DEPENDENCIES>
+  </PropertyGroup>
 </Project>

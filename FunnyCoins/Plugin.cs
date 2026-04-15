@@ -32,6 +32,8 @@ namespace FunnyCoins
         private readonly Dictionary<string, float> _cooldowns = new Dictionary<string, float>();
         private static readonly Tag CooldownTag = new Tag("funnycoins_cooldown");
         private static readonly Tag EffectTag = new Tag("funnycoins_effect");
+        
+        private static readonly Tag CustomItemsTag = new Tag("customitems_hint");
     
         public override void Enable()
         {  
@@ -91,6 +93,7 @@ namespace FunnyCoins
                     string text = string.Format(Config.CustomText.CooldownText, $"{remaining:F1}");
 
                     var display = RueDisplay.Get(player);
+                    display.Remove(CustomItemsTag);
                     display.Remove(EffectTag);
                     display.Show(
                         CooldownTag,
@@ -201,6 +204,7 @@ namespace FunnyCoins
             }
 
             var display = RueDisplay.Get(player);
+            display.Remove(CustomItemsTag);
             display.Remove(CooldownTag);
             display.Show(
                 EffectTag,
