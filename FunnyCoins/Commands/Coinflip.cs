@@ -16,7 +16,7 @@ namespace FunnyCoins.Commands
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
-            if (!sender.HasPermissions("FunnyCoins.Admin"))
+            if (!sender.HasPermissions("funnycoins.admin"))
             {
                 response = "You don't have permission to use this command.";
                 return false;
