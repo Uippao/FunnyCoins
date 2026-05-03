@@ -10,8 +10,8 @@ The configs should be mostly self-explanatory. You can customize messages the co
 
 ## Setup
 
-1. Download the latest version of `FunnyCoins.dll` as well as `dependencies.zip` from the releases page.
-2. Place `FunnyCoins.dll` into `YOUR_SERVER_DIR/LabAPI/plugins/global/`, or alternatively into a specific port's directory instead of global.
+1. Download the latest version of `FunnyCoins.dll`, `dependencies.zip` and `plugin-dependencies.zip` from the releases page.
+2. Place `FunnyCoins.dll` and the contents of `plugin-dependencies.zip` into `YOUR_SERVER_DIR/LabAPI/plugins/global/`, or alternatively into a specific port's directory instead of global.
 3. Extract `dependencies.zip` into `YOUR_SERVER_DIR/LabAPI/dependencies/global/`, or alternatively into a specific port's directory instead of global.
 4. Restart the server to generate the configs into `YOUR_SERVER_DIR/LabAPI/configs/PORT/FunnyCoins/config.yml`
 5. You're done! It is recommended to check out the configs at this point.
