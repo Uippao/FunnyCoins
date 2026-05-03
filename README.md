@@ -29,7 +29,7 @@ using LabApi.Features.Wrappers;
 // A simple effect
 public class SomethingNiceEffect : SimpleCoinEffect
 {
-    public override string Id => "SomethingNice";               // Unique effect ID
+    public override string Id => "SomethingNice";             // Unique effect ID
     public override bool IsGood => true;                      // Marks as good or bad
     public override int DefaultWeight => 5;                   // Default chance weight
     public override string DefaultMessage => "You feel nice"; // Message shown to players
