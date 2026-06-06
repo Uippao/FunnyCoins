@@ -470,4 +470,26 @@ namespace FunnyCoins.Effects
             FunnyCoins.Instance.ShowEffectMessage(target, this, "swapped");
         }
     }
+    
+    public class GoodbyeEffect : SimpleCoinEffect
+    {
+        public override string Id => "Goodbye";
+        public override bool IsGood => false;
+        public override int DefaultWeight => 4;
+
+        public override string DefaultMessage => "Farewell.";
+
+        public override void Execute(Player player)
+        {
+            player.EnableEffect<Ensnared>(1, 10f);
+            
+            Vector3 pos = player.Position + Vector3.up * 0.1f;
+            TimedGrenadeProjectile.SpawnActive(
+                pos,
+                ItemType.GrenadeHE,
+                player,
+                10.0
+            );
+        }
+    }
 }
