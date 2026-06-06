@@ -22,7 +22,7 @@ namespace FunnyCoins
         public override string Name { get; } = "FunnyCoins";
         public override string Description { get; } = "A LabAPI plugin that brings random effects to flipping coins.";
         public override string Author { get; } = "Uippao";
-        public override Version Version { get; } = new Version(1, 1, 0, 2);
+        public override Version Version { get; } = new Version(1, 2, 0, 0);
         public override Version RequiredApiVersion { get; } = new Version(LabApiProperties.CompiledVersion);
         public override LoadPriority Priority { get; } = LoadPriority.High;
 

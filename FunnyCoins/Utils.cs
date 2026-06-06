@@ -120,7 +120,6 @@ namespace FunnyCoins
             ItemType.MicroHID,
             ItemType.Jailbird,
             ItemType.ParticleDisruptor,
-            ItemType.GunSCP127,
             ItemType.SCP018,
             ItemType.SCP1509,
             ItemType.GunCom45,
