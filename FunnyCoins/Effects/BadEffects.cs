@@ -509,7 +509,7 @@ namespace FunnyCoins.Effects
         public IEnumerable<EffectMessageDefinition> DefaultMessages => new[]
         {
             new EffectMessageDefinition("grenade", "Farewell.", 5f),
-            new EffectMessageDefinition("troll", "You really thought this'd kill you, didn't you?", 6f)
+            new EffectMessageDefinition("troll", "You really thought this'd kill you, didn't you?", 5f)
         };
 
         public void Execute(Player player)
@@ -532,6 +532,93 @@ namespace FunnyCoins.Effects
                 grenade?.Destroy();
                 FunnyCoins.Instance.ShowEffectMessage(player, this, "troll");
             });
+        }
+    }
+    
+    public class OtherGoodbyeEffect : ICoinEffect
+    {
+        public string Id => "OtherGoodbye";
+        public bool IsGood => false;
+        public int DefaultWeight => 3;
+
+        public bool HandlesOwnMessage => true;
+        public string DefaultMessage => null;
+
+        public IEnumerable<EffectMessageDefinition> DefaultMessages => new[]
+        {
+            new EffectMessageDefinition("sender", "You just sentenced someone to death.", 5f),
+            new EffectMessageDefinition("recipient", "Farewell. Regards, {0}.", 5f),
+            new EffectMessageDefinition("noalive", "There was no one left to blow up but yourself.", 5f),
+        };
+
+        public void Execute(Player player)
+        {
+            Player target = GetClosestOtherPlayer(player);
+
+            bool isSelf = target == null;
+
+            if (isSelf)
+            {
+                target = player;
+
+                FunnyCoins.Instance.ShowEffectMessage(
+                    player,
+                    this,
+                    "noalive"
+                );
+            }
+            else
+            {
+                FunnyCoins.Instance.ShowEffectMessage(
+                    player,
+                    this,
+                    "sender"
+                );
+
+                FunnyCoins.Instance.ShowEffectMessage(
+                    target,
+                    this,
+                    "recipient",
+                    player.Nickname
+                );
+            }
+
+            target.EnableEffect<Ensnared>(1, 10f);
+            target.EnableEffect<HeavyFooted>(255, 10f);
+
+            Vector3 pos = target.Position + Vector3.up * 0.1f;
+
+            TimedGrenadeProjectile.SpawnActive(
+                pos,
+                ItemType.GrenadeHE,
+                target,
+                10
+            );
+        }
+
+        private static Player GetClosestOtherPlayer(Player player)
+        {
+            Player closest = null;
+            float closestDistanceSquared = float.MaxValue;
+
+            foreach (Player candidate in Player.List)
+            {
+                if (candidate == null ||
+                    !candidate.IsAlive ||
+                    candidate == player)
+                    continue;
+
+                float distanceSquared =
+                    (candidate.Position - player.Position).sqrMagnitude;
+
+                if (distanceSquared < closestDistanceSquared)
+                {
+                    closestDistanceSquared = distanceSquared;
+                    closest = candidate;
+                }
+            }
+
+            return closest;
         }
     }
     

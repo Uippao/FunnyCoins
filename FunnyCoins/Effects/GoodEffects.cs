@@ -3,6 +3,7 @@ using System.Linq;
 using CustomPlayerEffects;
 using InventorySystem.Items.Usables.Scp244;
 using LabApi.Features.Wrappers;
+using PlayerRoles;
 using UnityEngine;
 
 namespace FunnyCoins.Effects
@@ -610,6 +611,49 @@ namespace FunnyCoins.Effects
 
             Pickup.Create(ItemType.Radio, pos).Spawn();
             Pickup.Create(ItemType.Flashlight, pos).Spawn();
+        }
+    }
+    
+    public class PigEffect : SimpleCoinEffect
+    {
+        public override string Id => "Pig";
+        public override bool IsGood => true;
+        public override int DefaultWeight => 12;
+
+        public override string DefaultMessage => "I heard you like pigs";
+        public override float DefaultMessageDuration => 4f;
+
+        public override void Execute(Player player)
+        {
+            Player target = Player.List
+                .Where(p => p != null &&
+                            p.IsAlive &&
+                            p.Role == RoleTypeId.ClassD)
+                .OrderBy(_ => FunnyCoins.Rng.Next())
+                .FirstOrDefault();
+
+            if (target == null)
+            {
+                target = Player.List
+                    .Where(p => p != null &&
+                                p.IsAlive &&
+                                IsChaos(p.Role))
+                    .OrderBy(_ => FunnyCoins.Rng.Next())
+                    .FirstOrDefault();
+            }
+
+            if (target == null)
+                return;
+
+            player.Position = target.Position;
+        }
+
+        private static bool IsChaos(RoleTypeId role)
+        {
+            return role == RoleTypeId.ChaosConscript ||
+                   role == RoleTypeId.ChaosRifleman ||
+                   role == RoleTypeId.ChaosRepressor ||
+                   role == RoleTypeId.ChaosMarauder;
         }
     }
 }
