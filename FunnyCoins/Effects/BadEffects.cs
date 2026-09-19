@@ -485,6 +485,7 @@ namespace FunnyCoins.Effects
         public override void Execute(Player player)
         {
             player.EnableEffect<Ensnared>(1, 10f);
+            player.EnableEffect<HeavyFooted>(255, 10f);
             
             Vector3 pos = player.Position + Vector3.up * 0.1f;
             TimedGrenadeProjectile.SpawnActive(
@@ -513,7 +514,9 @@ namespace FunnyCoins.Effects
 
         public void Execute(Player player)
         {
-            player.EnableEffect<Ensnared>(1, 10f);
+            FunnyCoins.Instance.ShowEffectMessage(player, this, "grenade");
+            player.EnableEffect<Ensnared>(1, 11f);
+            player.EnableEffect<HeavyFooted>(255, 11f);
 
             Vector3 pos = player.Position + Vector3.up * 0.1f;
 
@@ -527,6 +530,7 @@ namespace FunnyCoins.Effects
             Timing.CallDelayed(10f, () =>
             {
                 grenade?.Destroy();
+                FunnyCoins.Instance.ShowEffectMessage(player, this, "troll");
             });
         }
     }
@@ -541,7 +545,7 @@ namespace FunnyCoins.Effects
 
         public override void Execute(Player player)
         {
-            player.EnableEffect<Ensnared>(15);
+            player.EnableEffect<Slowness>(15);
         }
     }
 }
