@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Text;
 using CommandSystem;
 using LabApi.Features.Permissions;
@@ -22,14 +23,16 @@ namespace FunnyCoins.Commands
                 return false;
             }
 
-            Player player = Player.Get(sender);
-            if (player == null || !player.IsAlive)
+            Player senderPlayer = Player.Get(sender);
+            if (senderPlayer == null || !senderPlayer.IsAlive)
             {
                 response = "The command can only be run by an alive player.";
                 return false;
             }
 
-            string arg = arguments.Count > 0 ? arguments.At(0).ToLowerInvariant() : null;
+            string arg = arguments.Count > 0
+                ? arguments.At(0).ToLowerInvariant()
+                : null;
 
             if (arg == "list")
             {
@@ -62,6 +65,7 @@ namespace FunnyCoins.Commands
             else
             {
                 effect = EffectRegistry.GetEffectById(arg);
+
                 if (effect == null)
                 {
                     response = $"Effect with ID '{arg}' not found.";
@@ -69,11 +73,71 @@ namespace FunnyCoins.Commands
                 }
             }
 
-            effect.Execute(player);
-            if (!effect.HandlesOwnMessage)
-                FunnyCoins.Instance.ShowEffectMessage(player, effect);
+            Player[] targets;
 
-            response = $"Coinflip executed: {(string.IsNullOrEmpty(arg) ? effect.Id : arg)}";
+            if (arguments.Count < 2)
+            {
+                targets = new[] { senderPlayer };
+            }
+            else
+            {
+                string targetArg = arguments.At(1);
+
+                if (targetArg == "*")
+                {
+                    targets = Player.List
+                        .Where(p => p.IsAlive)
+                        .ToArray();
+                }
+                else
+                {
+                    if (!int.TryParse(targetArg, out int playerId))
+                    {
+                        response = $"Invalid player ID: '{targetArg}'.";
+                        return false;
+                    }
+
+                    Player target = Player.Get(playerId);
+
+                    if (target == null)
+                    {
+                        response = $"Player with ID '{playerId}' not found.";
+                        return false;
+                    }
+
+                    if (!target.IsAlive)
+                    {
+                        response = $"Player '{target.Nickname}' is not alive.";
+                        return false;
+                    }
+
+                    targets = new[] { target };
+                }
+            }
+
+            foreach (Player target in targets)
+            {
+                effect.Execute(target);
+
+                if (!effect.HandlesOwnMessage)
+                    FunnyCoins.Instance.ShowEffectMessage(target, effect);
+            }
+
+            string effectName = string.IsNullOrEmpty(arg) ? effect.Id : arg;
+
+            if (arguments.Count < 2)
+            {
+                response = $"Coinflip executed: {effectName} on yourself.";
+            }
+            else
+            {
+                string targetArg = arguments.At(1);
+
+                response = targetArg == "*"
+                    ? $"Coinflip executed: {effectName} on {targets.Length} alive player(s)."
+                    : $"Coinflip executed: {effectName} on {targets[0].Nickname}.";
+            }
+
             return true;
         }
     }
