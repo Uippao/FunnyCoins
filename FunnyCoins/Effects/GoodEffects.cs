@@ -627,6 +627,7 @@ namespace FunnyCoins.Effects
         {
             Player target = Player.List
                 .Where(p => p != null &&
+                            p != player &&
                             p.IsAlive &&
                             p.Role == RoleTypeId.ClassD)
                 .OrderBy(_ => FunnyCoins.Rng.Next())
@@ -636,6 +637,7 @@ namespace FunnyCoins.Effects
             {
                 target = Player.List
                     .Where(p => p != null &&
+                                p != player &&
                                 p.IsAlive &&
                                 IsChaos(p.Role))
                     .OrderBy(_ => FunnyCoins.Rng.Next())
