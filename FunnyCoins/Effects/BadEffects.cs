@@ -1,10 +1,12 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Cassie;
 using CustomPlayerEffects;
 using LabApi.Features.Wrappers;
+using MEC;
 using PlayerRoles;
 using UnityEngine;
 
@@ -120,6 +122,7 @@ namespace FunnyCoins.Effects
         public override void Execute(Player player)
         {
             player.EnableEffect<Ensnared>(1, 10f);
+            player.EnableEffect<HeavyFooted>(255, 10f);
         }
     }
     
@@ -490,6 +493,55 @@ namespace FunnyCoins.Effects
                 player,
                 10.0
             );
+        }
+    }
+    
+    public class FakeGoodbyeEffect : ICoinEffect
+    {
+        public string Id => "FakeGoodbye";
+        public bool IsGood => false;
+        public int DefaultWeight => 4;
+
+        public bool HandlesOwnMessage => true;
+        public string DefaultMessage => null;
+        
+        public IEnumerable<EffectMessageDefinition> DefaultMessages => new[]
+        {
+            new EffectMessageDefinition("grenade", "Farewell.", 5f),
+            new EffectMessageDefinition("troll", "You really thought this'd kill you, didn't you?", 6f)
+        };
+
+        public void Execute(Player player)
+        {
+            player.EnableEffect<Ensnared>(1, 10f);
+
+            Vector3 pos = player.Position + Vector3.up * 0.1f;
+
+            var grenade = TimedGrenadeProjectile.SpawnActive(
+                pos,
+                ItemType.GrenadeHE,
+                player,
+                10.1
+            );
+
+            Timing.CallDelayed(10f, () =>
+            {
+                grenade?.Destroy();
+            });
+        }
+    }
+    
+    public class UnfitEffect : SimpleCoinEffect
+    {
+        public override string Id => "Unfit";
+        public override bool IsGood => false;
+        public override int DefaultWeight => 12;
+
+        public override string DefaultMessage => "You became less fit than before.";
+
+        public override void Execute(Player player)
+        {
+            player.EnableEffect<Ensnared>(15);
         }
     }
 }
