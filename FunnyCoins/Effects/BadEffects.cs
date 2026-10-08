@@ -397,7 +397,7 @@ namespace FunnyCoins.Effects
         public void Execute(Player player)
         {
             var scps = Player.List
-                .Where(p => p.IsSCP && p.IsAlive)
+                .Where(p => p.IsSCP && p.IsAlive && p.Role != RoleTypeId.Scp079)
                 .ToArray();
 
             if (scps.Length == 0)
