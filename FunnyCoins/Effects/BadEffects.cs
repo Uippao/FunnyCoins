@@ -635,4 +635,24 @@ namespace FunnyCoins.Effects
             player.EnableEffect<Slowness>(15);
         }
     }
+    
+    public class DrunkEffect : SimpleCoinEffect
+    {
+        public override string Id => "Drunk";
+        public override bool IsGood => false;
+        public override int DefaultWeight => 10;
+
+        public override string DefaultMessage => "You might've had one too many drinks last night.";
+        public override float DefaultMessageDuration => 5;
+
+        public override void Execute(Player player)
+        {
+            player.Scale = new Vector3(1f, 1f, -1f);
+            
+            Timing.CallDelayed(30f, () =>
+            {
+                player.Scale = new Vector3(1f, 1f, 1f);
+            });
+        }
+    }
 }
